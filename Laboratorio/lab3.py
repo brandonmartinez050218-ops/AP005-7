@@ -1,25 +1,43 @@
-int potenciometro = 18;
+## PYTHON
+int potenciometro = 34;
 int led = 21;
 
-int valorpotenciometro = 0;
-int valorpwm = 0;
-
+int valorPotenciometro = 0;
+int valorPWM = 0;
 void setup() {
   Serial.begin(115200);
   pinMode(led, OUTPUT);
 }
+void loop() {
+ 
+  valorPotenciometro = analogRead(potenciometro);
+
+  valorPWM = map(valorPotenciometro, 0, 4095, 0, 255);
+
+  analogWrite(led, valorPWM);
+  delay(100);
+}
+
+##c++
+
+#include <Arduino.h>
+
+int potenciometro = 34;
+int led = 21;
+
+int valorPotenciometro = 0;
+int valorPWM = 0;
+
+void setup() {
+  pinMode(led, OUTPUT);
+}
 
 void loop() {
-  valorpotenciometro = analogRead(potenciometro);
+  valorPotenciometro = analogRead(potenciometro);
 
-  valorpwm = map(valorpotenciometro, 0, 4095, 0, 255);
+  valorPWM = map(valorPotenciometro, 0, 4095, 0, 255);
 
-  analogWrite(led, valorpwm);
+  analogWrite(led, valorPWM);
 
-  Serial.print("Potenciometro: ");
-  Serial.print(valorpotenciometro);
-  Serial.print("; brillo led: ");
-  Serial.println(valorpwm);
-
-  delay(10);
+  delay(100);
 }
