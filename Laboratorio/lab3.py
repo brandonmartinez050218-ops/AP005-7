@@ -1,19 +1,24 @@
-from machine import Pin, ADC
-from time import sleep
+int potenciometro = D18;
+int led = D21;
 
-led = Pin(2, Pin.OUT)
-pot = ADC(Pin(34))
+int valorpotenciometro = 0;
+int valorpwm = 0;
 
-pot.atten(ADC.ATTN_11DB)
-pot.width(ADC.WIDTH_12BIT)
+void setup(){
+  Serial.begin(115200);
+  pinMode(led, OUTPUT);
 
-while True:
-    valor = pot.read()
-    print(valor)
+}
+void loop(){
+  valorpotenciometro = analogRead(potenciometro);
 
-    if 1800 <= valor <= 2300:
-        led.on()
-    else:
-        led.off()
+  valorpwm = map(valorpotenciometro,0,4095,0,255);
 
-    sleep(0.1)
+  analogWrite(led,valorpwm);
+
+  Serialprint("Potenciometro: ");
+  Serialprint(valorpotenciometro);
+  Serialprint("; brillo led: ");
+  Serialprint(valorpwm);
+  delay(10);
+}
