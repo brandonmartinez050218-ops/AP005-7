@@ -1,11 +1,13 @@
-from machine import Pin
-from time import sleep
+int led = 21;
 
-led = Pin(21, Pin.OUT)
+void setup() {
+  pinMode(led, OUTPUT);
+}
 
-while True:
-    led.on()
-    sleep(1)
+void loop() {
+  digitalWrite(led, HIGH);
+  delay(1000);
 
-    led.off()
-    sleep(1)
+  digitalWrite(led, LOW);
+  delay(1000);
+}
