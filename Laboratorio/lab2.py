@@ -1,21 +1,15 @@
 ## PYTHON
-int led = 21;
+from machine import Pin
+from time import sleep
 
-void setup() {
-  pinMode(led, OUTPUT);
+led = Pin(21, Pin.OUT)
 
-  for (int i = 0; i < 5; i++) {
-    digitalWrite(led, HIGH);
-    delay(1000);
+for i in range(5):
+    led.on()
+    sleep(1)
 
-    digitalWrite(led, LOW);
-    delay(1000);
-  }
-}
-void loop() {
-}
-
-
+    led.off()
+    sleep(1)
 
 
 ## C++
