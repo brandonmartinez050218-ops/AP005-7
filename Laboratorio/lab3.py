@@ -1,24 +1,25 @@
-int potenciometro = D18;
-int led = D21;
+int potenciometro = 18;
+int led = 21;
 
 int valorpotenciometro = 0;
 int valorpwm = 0;
 
-void setup(){
+void setup() {
   Serial.begin(115200);
   pinMode(led, OUTPUT);
-
 }
-void loop(){
+
+void loop() {
   valorpotenciometro = analogRead(potenciometro);
 
-  valorpwm = map(valorpotenciometro,0,4095,0,255);
+  valorpwm = map(valorpotenciometro, 0, 4095, 0, 255);
 
-  analogWrite(led,valorpwm);
+  analogWrite(led, valorpwm);
 
-  Serialprint("Potenciometro: ");
-  Serialprint(valorpotenciometro);
-  Serialprint("; brillo led: ");
-  Serialprint(valorpwm);
+  Serial.print("Potenciometro: ");
+  Serial.print(valorpotenciometro);
+  Serial.print("; brillo led: ");
+  Serial.println(valorpwm);
+
   delay(10);
 }
