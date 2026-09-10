@@ -1,22 +1,18 @@
 ## PYTHON
-int potenciometro = 34;
-int led = 21;
+from machine import Pin, ADC, PWM
+from time import sleep
 
-int valorPotenciometro = 0;
-int valorPWM = 0;
-void setup() {
-  Serial.begin(115200);
-  pinMode(led, OUTPUT);
-}
-void loop() {
- 
-  valorPotenciometro = analogRead(potenciometro);
+potenciometro = ADC(Pin(34))
+led = PWM(Pin(21), freq=5000)
 
-  valorPWM = map(valorPotenciometro, 0, 4095, 0, 255);
+potenciometro.atten(ADC.ATTN_11DB)
 
-  analogWrite(led, valorPWM);
-  delay(100);
-}
+while True:
+    valor_potenciometro = potenciometro.read()
+    valor_pwm = int(valor_potenciometro * 255 / 4095)
+    led.duty(int(valor_pwm * 65535 / 255))
+    sleep(0.1)
+
 
 ##c++
 
