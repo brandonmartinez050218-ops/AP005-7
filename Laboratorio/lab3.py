@@ -9,8 +9,12 @@ potenciometro.atten(ADC.ATTN_11DB)
 
 while True:
     valor_potenciometro = potenciometro.read()
-    valor_pwm = int(valor_potenciometro * 255 / 4095)
-    led.duty(int(valor_pwm * 65535 / 255))
+    valor_pwm = int(valor_potenciometro * 1023 / 4095)
+    
+    led.duty(valor_pwm)
+    
+    print("ADC:", valor_potenciometro, "| PWM:", valor_pwm)
+    
     sleep(0.1)
 
 
